@@ -3,21 +3,33 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-100 text-red-300;
+    @apply bg-gray-100;
+}
+
+.input-area {
+    @apply rounded-full bg-gray-50 my-3 px-4 py-1 h-10 w-full inline-flex items-center;
+}
+
+.input-area input {
+    @apply outline-none bg-transparent flex-1 w-full ml-2;
 }
 
 .btn {
-    @apply px-2 py-0 rounded;
+    @apply px-3 py-1 rounded bg-gray-50 font-medium flex items-center gap-1;
+}
 
-    &:hover {
-        @apply opacity-95;
-    }
+.btn:hover {
+    @apply opacity-80;
+}
 
-    .btn-green {
-        @apply bg-green-400 text-white;
-    }
+.btn:focus {
+    @apply scale-90;
+}
 
-    .btn-blue {
-        @apply bg-blue-400 text-white;
-    }
+.btn-green {
+    @apply bg-green-400 text-white;
+}
+
+.btn-blue {
+    @apply bg-blue-400 text-white;
 }
