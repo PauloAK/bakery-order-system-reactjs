@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_API_URL;
 
 export default {
     
-    get: async (endPoint) => {
+    get: async (endPoint : string) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'GET',
             headers: {
@@ -16,7 +16,7 @@ export default {
         return await req.json();
     },
 
-    post: async (endPoint, body) => {
+    post: async (endPoint : string, body : object) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'POST',
             headers: {
@@ -30,7 +30,7 @@ export default {
     },
 
     
-    put: async (endPoint, body) => {
+    put: async (endPoint : string, body : object) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'PUT',
             headers: {
@@ -43,7 +43,7 @@ export default {
         return await req.json();
     },
 
-    delete: async (endPoint) => {
+    delete: async (endPoint : string) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'DELETE',
             headers: {
@@ -53,12 +53,13 @@ export default {
             }
         });
         return await req.json();
-    },
-
-    getBearerToken: () => {
-        if (!Storage.exists('token'))
-            return '';
-
-        return `Bearer ${Storage.get(token)}`;
     }
 };
+
+function getBearerToken() : string
+{
+    if (!Storage.exists('token'))
+        return '';
+
+    return `Bearer ${Storage.get('token')}`;
+}
