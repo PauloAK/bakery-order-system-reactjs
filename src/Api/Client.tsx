@@ -13,7 +13,11 @@ export default {
                 "Authorization": getBearerToken()
             }
         });
-        return await req.json();
+
+        return {
+            status: req.status,
+            json: await req.json()
+        };
     },
 
     post: async (endPoint : string, body : object) => {
@@ -26,7 +30,11 @@ export default {
             },
             body: JSON.stringify(body)
         });
-        return await req.json();
+
+        return {
+            status: req.status,
+            json: await req.json()
+        };
     },
 
     
@@ -40,7 +48,11 @@ export default {
             },
             body: JSON.stringify(body)
         });
-        return await req.json();
+
+        return {
+            status: req.status,
+            json: await req.json()
+        };
     },
 
     delete: async (endPoint : string) => {
@@ -52,7 +64,11 @@ export default {
                 "Authorization": getBearerToken()
             }
         });
-        return await req.json();
+        
+        return {
+            status: req.status,
+            json: await req.json()
+        };
     }
 };
 

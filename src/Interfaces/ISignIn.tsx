@@ -1,6 +1,6 @@
 interface ISignIn {
-    email : string;
-    senha : string;
+    email ?: string;
+    password ?: string;
 }
 
 export default ISignIn;
