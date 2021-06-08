@@ -1,24 +1,26 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useState } from 'react';
 import './style.css';
 import { RiUser3Line, RiLockPasswordLine, RiLoginBoxLine } from 'react-icons/ri';
-import ISignIn from '../../../Interfaces/ISignIn';
 import AuthApi from '../../../Api/AuthApi';
 import Swal from '../../../Components/UI/Swal';
 import Storage from '../../../Storage';
-import { LoadingContext } from '../../../Providers/LoadingProvider';
+import { useLoading } from '../../../Providers/LoadingProvider';
+import { useHistory } from 'react-router';
 
 const SignIn = () => {
-    const loading = useContext(LoadingContext);
-    const [ formData, setFormData ] = useState<ISignIn>();
-    const onChange = (e : any) => {
+    const loading = useLoading();
+    const history = useHistory();
+    const [ formData, setFormData ] = useState({});
+    const onChange = (e) => {
         const {name, value} = e.currentTarget;
         setFormData({...formData, [name]:value});
     };
 
-    let submitHandle = async (e : any) => {
+    let submitHandle = async (e) => {
         e.preventDefault();
         loading.show();
-        let response = await AuthApi.signIn(formData as ISignIn);
+        
+        let response = await AuthApi.signIn(formData);
         if (response.status !== 200) {
             if (response.status === 401)
                 Swal.showSwal('error', 'Usuário ou senha incorretos', '', true);
@@ -29,7 +31,7 @@ const SignIn = () => {
             let responseMe = await AuthApi.me();
             Storage.set('user', responseMe.json);
             Swal.showSwal('success', 'Login realizado com sucesso!', '', true);
-            // Redirect to Home
+            history.push('/');
         }
         loading.hide();
     }

@@ -2,9 +2,8 @@ import Storage from '../Storage';
 
 const BASE_URL = process.env.REACT_APP_API_URL; 
 
-export default {
-    
-    get: async (endPoint : string) => {
+const Client = {
+    get : async (endPoint) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'GET',
             headers: {
@@ -20,7 +19,7 @@ export default {
         };
     },
 
-    post: async (endPoint : string, body : object) => {
+    post : async (endPoint, body) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'POST',
             headers: {
@@ -38,7 +37,7 @@ export default {
     },
 
     
-    put: async (endPoint : string, body : object) => {
+    put : async (endPoint, body) => {
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'PUT',
             headers: {
@@ -55,7 +54,7 @@ export default {
         };
     },
 
-    delete: async (endPoint : string) => {
+    destroy : async (endPoint) => { // Unable to name as delete
         let req = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'DELETE',
             headers: {
@@ -72,10 +71,12 @@ export default {
     }
 };
 
-function getBearerToken() : string
+function getBearerToken()
 {
     if (!Storage.exists('token'))
         return '';
 
     return `Bearer ${Storage.get('token')}`;
 }
+
+export default Client;

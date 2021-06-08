@@ -1,16 +1,9 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import Loading from '../Components/UI/Loading';
 
-interface IProps {
-    children : any
-}
+export const LoadingContext = createContext({});
 
-export const LoadingContext = createContext({
-    show: () => {},
-    hide: () => {},
-});
-
-export const LoadingProvider = ({ children } : IProps) => {
+export const LoadingProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     
     const show = () => {
@@ -28,3 +21,5 @@ export const LoadingProvider = ({ children } : IProps) => {
         </LoadingContext.Provider>
     )
 }
+
+export const useLoading = () => useContext(LoadingContext)

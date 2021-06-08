@@ -1,12 +1,12 @@
-import ISignIn from '../Interfaces/ISignIn';
 import Client from './Client';
 
-export default {
-    signIn: async (formData : ISignIn) => {
+export const AuthApi = {
+    signIn: async (formData) => {
         return await Client.post('/api/v1/auth/login', formData);
     },
-
     me: async () => {
         return await Client.post('/api/v1/auth/me', {});
-    },
+    }
 };
+
+export default AuthApi;

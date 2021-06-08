@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-interface IProps {
-    icon: any,
-    placeholder : string
-};
-
-const Input = ({ icon, placeholder } : IProps) => {
+const Input = ({ icon, placeholder }) => {
     return (
         <>
             <div className="input-area w-full">

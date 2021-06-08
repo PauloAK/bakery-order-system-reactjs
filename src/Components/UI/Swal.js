@@ -1,20 +1,22 @@
-import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { default as SwalPackage } from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-const swal = withReactContent(Swal);
+const swal = withReactContent(SwalPackage);
 
-export default {
-    showSwal(type : SweetAlertIcon, text : string, title ?: string, isToast : boolean = false) {
+const Swal = {
+    showSwal: (type, text, title, isToast = false) => {
         if (isToast) {
-            const Toast = Swal.mixin({
+            const Toast = SwalPackage.mixin({
                 toast: true,
                 position: 'top',
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
+                backdrop: false,
                 didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    toast.addEventListener('mouseenter', SwalPackage.stopTimer)
+                    toast.addEventListener('mouseleave', SwalPackage.resumeTimer)
+                    toast.addEventListener('click', SwalPackage.close)
                 }
             })
             
@@ -30,4 +32,6 @@ export default {
             });
         }
     }
-}
+};
+
+export default Swal;
