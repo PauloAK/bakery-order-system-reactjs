@@ -37,7 +37,7 @@ const SignIn = () => {
     }
 
     return (
-        <div className="content">
+        <div className="content auth-form">
             <div className="box">
                 <h1>Login</h1>
                 <div className="w-full px-8">

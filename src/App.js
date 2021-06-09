@@ -6,6 +6,7 @@ import {
 import PrivateRoute from './Components/Routing/PrivateRoute';
 import Home from './Pages/App/Home';
 import NotFound from './Pages/NotFound';
+import Products from './Pages/App/Products';
 
 function App() {
     return (
@@ -15,6 +16,9 @@ function App() {
             </Route>
             <PrivateRoute exact path="/">
                 <Home />
+            </PrivateRoute>
+            <PrivateRoute path="/products">
+                <Products />
             </PrivateRoute>
             <Route path="*">
                 <NotFound />
