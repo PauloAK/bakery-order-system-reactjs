@@ -6,7 +6,8 @@ import {
 import PrivateRoute from './Components/Routing/PrivateRoute';
 import Home from './Pages/App/Home';
 import NotFound from './Pages/NotFound';
-import Products from './Pages/App/Products';
+import ProductIndex from './Pages/App/Products/ProductIndex';
+import ProductForm from './Pages/App/Products/ProductForm';
 
 function App() {
     return (
@@ -17,8 +18,11 @@ function App() {
             <PrivateRoute exact path="/">
                 <Home />
             </PrivateRoute>
-            <PrivateRoute path="/products">
-                <Products />
+            <PrivateRoute path="/products" exact>
+                <ProductIndex />
+            </PrivateRoute>
+            <PrivateRoute path="/products/create" exact>
+                <ProductForm />
             </PrivateRoute>
             <Route path="*">
                 <NotFound />

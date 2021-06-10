@@ -36,11 +36,11 @@ const BaseLayout = ({ backLink, showBackLink = false, children }) => {
     return (
         <div className="app-container">
             { showBackLink ? 
-                <div className="bg-white h-10 fixed top-0 left-0 right-0 shadow-md shadow-white flex items-center gap-1 px-2 font-medium">
-                    <Link to={backLink}>
+                <div className="bg-white h-10 fixed top-0 left-0 right-0 shadow-md px-2 flex items-center font-medium">
+                    <Link to={backLink} className="flex items-center gap-1">
                         <BsChevronLeft />
+                        Voltar
                     </Link>
-                    Voltar
                 </div>
                 : ''
             }

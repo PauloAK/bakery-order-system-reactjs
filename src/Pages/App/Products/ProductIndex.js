@@ -4,11 +4,11 @@ import { FaBox } from "react-icons/fa";
 import FloatingButton from "../../../Components/UI/FloatingButton";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Products = () => {
+const ProductIndex = () => {
     const products = [{}];
     return (
         <BaseLayout>
-            <FloatingButton icon={<AiOutlinePlus />} color="blue"/>
+            <FloatingButton icon={<AiOutlinePlus />} color="blue" href="/products/create"/>
             <div className="p-2 flex gap-2 flex-col">
                 {products.map(i => {
                     return (
@@ -24,4 +24,4 @@ const Products = () => {
     );
 }
 
-export default Products;
+export default ProductIndex;
