@@ -5,3 +5,24 @@
 .input-area input {
     @apply outline-none bg-transparent flex-1 w-full ml-2;
 }
+
+.form-group label {
+    @apply text-sm text-gray-800;
+}
+
+.form-group > input, .form-group > textarea {
+    @apply w-full text-sm px-2 py-0.5 rounded border border-gray-300;
+}
+
+.form-group > .input-group {
+    @apply flex items-center;
+}
+
+.form-group > .input-group > .input-group-addon {
+    @apply w-8 py-0 text-base flex justify-center items-center border border-gray-300 border-r-0 rounded-l;
+    height: 1.65rem;
+}
+
+.form-group > .input-group > input {
+    @apply flex-1 px-2 py-0.5 rounded rounded-l-none border border-gray-300 text-sm;
+}
