@@ -6,6 +6,9 @@ export const AuthApi = {
     },
     me: async () => {
         return await Client.post('/api/v1/auth/me', {});
+    },
+    refreshToken: async () => {
+        return await Client.post('/api/v1/auth/refresh');
     }
 };
 

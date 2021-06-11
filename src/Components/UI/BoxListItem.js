@@ -1,6 +1,8 @@
-const BoxListItem = ({ icon, title, text }) => {
+import { Link } from "react-router-dom";
+
+const BoxListItem = ({ icon, title, text, href = ''}) => {
     return (
-        <div className="box w-full bg-white rounded-xl shadow-md flex">
+        <Link className="box w-full bg-white rounded-xl shadow-md flex hover:opacity-90" to={href}>
             <div className="w-10 flex items-center justify-center h-auto bg-blue-300 text-white rounded-l-xl">
                 {icon}
             </div>
@@ -8,7 +10,7 @@ const BoxListItem = ({ icon, title, text }) => {
                 <span className="font-medium text-sm">{title}</span>
                 <div className="text-xs">{text}</div>
             </div>
-        </div>
+        </Link>
     );
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Input = ({ icon, placeholder }) => {
+const InputArea = ({ icon, placeholder }) => {
     return (
         <>
             <div className="input-area w-full">
@@ -11,4 +11,4 @@ const Input = ({ icon, placeholder }) => {
     )
 }
 
-export default Input;
+export default InputArea;

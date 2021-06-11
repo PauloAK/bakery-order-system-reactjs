@@ -24,6 +24,9 @@ function App() {
             <PrivateRoute path="/products/create" exact>
                 <ProductForm />
             </PrivateRoute>
+            <PrivateRoute path="/products/:id" exact>
+                <ProductForm />
+            </PrivateRoute>
             <Route path="*">
                 <NotFound />
             </Route>

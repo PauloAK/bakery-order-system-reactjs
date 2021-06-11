@@ -1,9 +1,17 @@
 .input-area {
-    @apply rounded-full bg-gray-50 my-3 px-4 py-1 h-10 w-full inline-flex items-center;
+    @apply rounded-full bg-gray-50 my-3 px-4 py-1 h-10 w-full flex items-center;
 }
 
 .input-area input {
     @apply outline-none bg-transparent flex-1 w-full ml-2;
+}
+
+form {
+    @apply flex;
+}
+
+.form-group {
+    @apply px-1 flex flex-col my-1 flex-shrink w-full;
 }
 
 .form-group label {
@@ -14,15 +22,18 @@
     @apply w-full text-sm px-2 py-0.5 rounded border border-gray-300;
 }
 
+.form-group > input {
+    @apply h-7
+}
+
 .form-group > .input-group {
     @apply flex items-center;
 }
 
 .form-group > .input-group > .input-group-addon {
-    @apply w-8 py-0 text-base flex justify-center items-center border border-gray-300 border-r-0 rounded-l;
-    height: 1.65rem;
+    @apply w-8 py-0 h-7 text-base flex justify-center items-center border border-gray-300 border-r-0 rounded-l;
 }
 
 .form-group > .input-group > input {
-    @apply flex-1 px-2 py-0.5 rounded rounded-l-none border border-gray-300 text-sm;
+    @apply flex-1 px-2 py-0.5 rounded rounded-l-none border border-gray-300 text-sm h-7;
 }

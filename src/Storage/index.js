@@ -15,6 +15,10 @@ const Storage = {
 
     exists: (key) => {
         return localStorage.getItem(`${PREFIX}/${key}`) != null;
+    },
+
+    clear: () => {
+        return localStorage.clear();
     }
 };
 

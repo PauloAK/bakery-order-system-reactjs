@@ -21,3 +21,11 @@
 .btn-blue {
     @apply bg-blue-400 text-white;
 }
+
+.btn-red {
+    @apply bg-red-400 text-white;
+}
+
+.btn-yellow {
+    @apply bg-red-400 text-white;
+}

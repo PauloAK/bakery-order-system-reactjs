@@ -41,19 +41,19 @@ const SignIn = () => {
             <div className="box">
                 <h1>Login</h1>
                 <div className="w-full px-8">
-                    <form onSubmit={submitHandle}>
-                        <div className="input-area">
+                    <form onSubmit={submitHandle} className="flex-col">
+                        <div className="input-area w-full">
                             <RiUser3Line width="24" />
                             <input type="email" name="email" placeholder="Digite seu email" onChange={onChange} required/>
                         </div>
 
                         
-                        <div className="input-area">
+                        <div className="input-area w-full">
                             <RiLockPasswordLine width="24" />
                             <input type="password" name="password" placeholder="Digite sua senha" onChange={onChange} required/>
                         </div>
 
-                        <div className="mt-4 mb-2 flex justify-center">
+                        <div className="mt-4 mb-2 flex justify-center w-full">
                             <button className="btn btn-blue">
                                 Acessar
                                 <RiLoginBoxLine />

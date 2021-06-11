@@ -7,12 +7,12 @@ import { AuthProvider } from './Providers/AuthProvider';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(    
-    <LoadingProvider>
-        <AuthProvider>
-            <Router>
+    <Router>
+        <LoadingProvider>
+            <AuthProvider>
                 <App />
-            </Router>
-        </AuthProvider>
-    </LoadingProvider>,
+            </AuthProvider>
+        </LoadingProvider>
+    </Router>,
     document.getElementById('root')
 );

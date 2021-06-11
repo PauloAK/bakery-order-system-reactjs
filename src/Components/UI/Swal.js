@@ -31,6 +31,9 @@ const Swal = {
                 icon: type
             });
         }
+    },
+    showToast: (type, text) => {
+        Swal.showSwal(type, text, '', true);
     }
 };
 
