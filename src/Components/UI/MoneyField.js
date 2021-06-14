@@ -1,20 +1,21 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Inputmask from "inputmask";
+import MoneyHelper from '../../Helpers/MoneyHelper';
 
 const MoneyField = ({ name, onChange, required = false, defaultValue}) => {
     const [value, setValue] = useState("");
     const ref = useRef(null);
 
     useEffect(() => {
-        if (defaultValue)
-            setValue(defaultValue);
+        if (defaultValue || defaultValue === 0)
+            setValue(defaultValue.toString().padStart(3, '0'));
     }, [defaultValue])
     
     const triggerChange = (e) => {
         let event = {
             currentTarget: {
                 name: name,
-                value: e.target.value.replace(/ /g, '').replace(',', '').trim()
+                value: MoneyHelper.toInt(e.target.value)
             }
         };
         onChange(event);
@@ -28,7 +29,7 @@ const MoneyField = ({ name, onChange, required = false, defaultValue}) => {
                 type: "decimal",
                 greedy: false,
                 placeholder: '',
-                showMaskOnHover: false
+                showMaskOnHover: false                
             });
 
             inputmask.mask(ref.current);

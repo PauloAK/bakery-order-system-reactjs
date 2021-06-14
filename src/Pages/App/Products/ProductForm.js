@@ -9,10 +9,12 @@ import Swal from "../../../Components/UI/Swal";
 import { useHistory, useParams } from "react-router";
 import _ from "lodash";
 import DeleteButton from "../../../Components/UI/DeleteButton";
-import MoneyField from '../../../Components/UI/MoneyField'
+import MoneyField from '../../../Components/UI/MoneyField';
+import ValidationHelper from "../../../Helpers/ValidationHelper";
 
 const ProductForm = () => {
     const [ formData, setFormData ] = useState({});
+    const [ errors, setErrors ] = useState({});
     const [ id, setId ] = useState(null);
     const loading = useLoading();
     const history = useHistory();
@@ -45,6 +47,7 @@ const ProductForm = () => {
 
     const submitHandle = async e => {
         e.preventDefault();
+        setErrors({});
         loading.show();
         let response = await (id ? ProductApi.update(id, formData) : ProductApi.store(formData));
         loading.hide();
@@ -52,7 +55,7 @@ const ProductForm = () => {
             Swal.showToast("success", response.status === 201 ? "Produto criado com sucesso" : "Produto atualizado com sucesso");
             history.push('/products');
         } else {
-            // Error
+            setErrors(response.json.errors);
         }
     }
 
@@ -61,33 +64,30 @@ const ProductForm = () => {
             <div className="p-2">
                 <Box title={id ? 'Editar Produto' : 'Novo Produto'}>
                     <form onSubmit={submitHandle} className="flex-wrap">
-                        <div className="form-group w-full lg:w-4/5">
+                        <div className={`form-group w-full lg:w-4/5 `+ (ValidationHelper.hasError('name', errors) ? 'error' : '') }>
                             <label>Nome:</label>
                             <input name="name" required onChange={onChange} value={formData.name || ''}/>
+                            <span className="errors">{ValidationHelper.getErrors('name', errors)}</span>
                         </div>
 
-                        <div className="form-group w-full lg:w-1/5">
+                        <div className={`form-group w-full lg:w-1/5 ` + (ValidationHelper.hasError('value', errors) ? 'error' : '') }>
                             <label>Valor (R$):</label>
-                            <InputGroup
-                                addon={<AiOutlineDollar />}
-                            >
-                                <MoneyField 
-                                    onChange={onChange}
-                                    required={true}
-                                    defaultValue={formData.value}
-                                    name="value"
-                                />
+                            <InputGroup addon={<AiOutlineDollar />}>
+                                <MoneyField onChange={onChange} required={true} defaultValue={formData.value} name="value"/>
                             </InputGroup>
+                            <span className="errors">{ValidationHelper.getErrors('value', errors)}</span>
                         </div>
 
-                        <div className="form-group">
+                        <div className={`form-group w-full ` + (ValidationHelper.hasError('short_description', errors) ? 'error' : '') }>
                             <label>Descrição curta:</label>
                             <textarea name="short_description" required resize="vertical" rows="2" onChange={onChange} value={formData.short_description || ''}></textarea>
+                            <span className="errors">{ValidationHelper.getErrors('short_description', errors)}</span>
                         </div>
 
-                        <div className="form-group">
+                        <div className={`form-group ` + (ValidationHelper.hasError('value', errors) ? 'long_description' : '') }>
                             <label>Descrição longa:</label>
                             <textarea name="long_description" resize="vertical" rows="4" onChange={onChange} value={formData.long_description || ''}></textarea>
+                            <span className="errors">{ValidationHelper.getErrors('long_description', errors)}</span>
                         </div>
 
                         <div className="w-full flex justify-center mt-2 gap-2">
