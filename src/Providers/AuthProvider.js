@@ -24,7 +24,10 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const check = () => {
+    const check = async () => {
+        let tokenRefreshDate = Storage.get('token_refresh_date');
+        if ( !tokenRefreshDate || new Date(tokenRefreshDate) <= new Date )
+            return false;
         return Storage.exists('user');
     };
 
@@ -49,12 +52,26 @@ export const AuthProvider = ({ children }) => {
                 history.push('/signin');
             } else {
                 Storage.set('token', refresh.json.token);
-                let newRefreshDate = new Date;
-                newRefreshDate.setMinutes( newRefreshDate.getMinutes() + 20 );
-                Storage.set('token_refresh_date', newRefreshDate);
+                setRefreshDate();
                 Storage.remove('isRefreshingToken');
             }
         }
+    }
+
+    const login = (user) => {
+        Storage.set('user', user);
+        setRefreshDate();
+    }
+
+    const logout = () => {
+        Storage.clear();
+        history.push('/signin');
+    }
+
+    const setRefreshDate = () => {
+        let newRefreshDate = new Date;
+        newRefreshDate.setMinutes( newRefreshDate.getMinutes() + 20 );
+        Storage.set('token_refresh_date', newRefreshDate);
     }
 
     return (

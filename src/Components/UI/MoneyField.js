@@ -1,21 +1,50 @@
-import * as React from 'react';
-import CurrencyInput from 'react-currency-masked-input';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Inputmask from "inputmask";
 
-const InputGroup = ({ name, onChange, required = false, defaultValue, value}) => {
-    if (defaultValue){
-        defaultValue = defaultValue.toString();
-        if (defaultValue.length >= 3)
-            defaultValue = defaultValue.substr(0, defaultValue.length - 2) + '.' + defaultValue.slice(-2);
+const MoneyField = ({ name, onChange, required = false, defaultValue}) => {
+    const [value, setValue] = useState("");
+    const ref = useRef(null);
+
+    useEffect(() => {
+        if (defaultValue)
+            setValue(defaultValue);
+    }, [defaultValue])
+    
+    const triggerChange = (e) => {
+        let event = {
+            currentTarget: {
+                name: name,
+                value: e.target.value.replace(/ /g, '').replace(',', '').trim()
+            }
+        };
+        onChange(event);
     }
+
+    useLayoutEffect(() => {
+        if (ref?.current) {
+            const inputmask = new Inputmask("decimal", {
+                mask: '[999 999 999 99]9,99',
+                numericInput: true,
+                type: "decimal",
+                greedy: false,
+                placeholder: '',
+                showMaskOnHover: false
+            });
+
+            inputmask.mask(ref.current);
+        }
+    }, []);
+
     return (
-        <CurrencyInput 
-            onChange={onChange}
+        <input
+            type="text"
+            ref={ref}
+            onChange={e => { setValue(e.target.value); triggerChange(e) }}
             required={required}
-            defaultValue={defaultValue}
+            value={value}
             name={name}
-            separator="."
         />
     )
 }
 
-export default InputGroup;
+export default MoneyField;

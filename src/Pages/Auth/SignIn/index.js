@@ -6,10 +6,12 @@ import Swal from '../../../Components/UI/Swal';
 import Storage from '../../../Storage';
 import { useLoading } from '../../../Providers/LoadingProvider';
 import { useHistory } from 'react-router';
+import { useAuth } from '../../../Providers/AuthProvider';
 
 const SignIn = () => {
     const loading = useLoading();
     const history = useHistory();
+    const auth = useAuth();
     const [ formData, setFormData ] = useState({});
     const onChange = (e) => {
         const {name, value} = e.currentTarget;
@@ -29,7 +31,7 @@ const SignIn = () => {
         } else {
             Storage.set('token', response.json.token);
             let responseMe = await AuthApi.me();
-            Storage.set('user', responseMe.json);
+            auth.login(responseMe.json);
             Swal.showSwal('success', 'Login realizado com sucesso!', '', true);
             history.push('/');
         }
@@ -46,7 +48,6 @@ const SignIn = () => {
                             <RiUser3Line width="24" />
                             <input type="email" name="email" placeholder="Digite seu email" onChange={onChange} required/>
                         </div>
-
                         
                         <div className="input-area w-full">
                             <RiLockPasswordLine width="24" />

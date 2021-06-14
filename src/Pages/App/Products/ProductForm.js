@@ -30,14 +30,10 @@ const ProductForm = () => {
         setFormData({...formData, [name]:value});
     };
 
-    const onMoneyFieldChange = (e, masked) => {
-        setFormData({...formData, value: masked.replace('.', '')});
-    };
-
     const loadProductInfo = async (id) => {
         loading.show();
         let response = await ProductApi.get(id);
-        if (response.status == 404){
+        if (response.status === 404){
             Swal.showToast('error', '404 - Não encontrado');
             history.goBack();
             loading.hide();
@@ -53,7 +49,7 @@ const ProductForm = () => {
         let response = await (id ? ProductApi.update(id, formData) : ProductApi.store(formData));
         loading.hide();
         if ( [200, 201].indexOf(response.status) !== -1 ){
-            Swal.showToast("success", response.status == 201 ? "Produto criado com sucesso" : "Produto atualizado com sucesso");
+            Swal.showToast("success", response.status === 201 ? "Produto criado com sucesso" : "Produto atualizado com sucesso");
             history.push('/products');
         } else {
             // Error
@@ -76,7 +72,7 @@ const ProductForm = () => {
                                 addon={<AiOutlineDollar />}
                             >
                                 <MoneyField 
-                                    onChange={onMoneyFieldChange}
+                                    onChange={onChange}
                                     required={true}
                                     defaultValue={formData.value}
                                     name="value"
